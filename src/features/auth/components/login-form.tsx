@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { authClient } from "@/lib/auth-client";
 
 
 const loginSchema = z.object({
@@ -38,7 +38,18 @@ export function LoginForm() {
     });
 
     const onSubmit = async (values: LoginFormValues) => {
-        console.log(values)
+        await authClient.signIn.email({
+            email : values.email,
+            password : values.password,
+            callbackURL : "/"
+        },{
+            onSuccess : () => {
+                router.push("/")
+            },
+            onError : (ctx) => {
+                toast.error(ctx.error.message)
+            }
+        })
     }
 
     const isPending = form.formState.isSubmitting;
@@ -46,8 +57,8 @@ export function LoginForm() {
 
 
     return (
-        <div className="flex flex-col gap-6">
-            <Card>
+        <div className="flex flex-col gap-6 justify-center items-center h-screen">
+            <Card className="w-[20%] shadow-2xl">
                 <CardHeader className="text-center">
                     <CardTitle>
                         Welcome back
