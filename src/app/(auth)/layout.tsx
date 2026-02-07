@@ -1,5 +1,3 @@
-import Link from "next/link";
-import Image from "next/image";
 import { AuthLayout } from "@/features/auth/components/auth-layout";
 
 
