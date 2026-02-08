@@ -4,16 +4,16 @@ import prisma from "@/lib/db";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { toast } from "sonner";
+import { TRPCError } from "@trpc/server";
 
 export const appRouter = createTRPCRouter({
     testAi: baseProcedure.mutation(async () => {
-
+        throw new TRPCError({code : "BAD_REQUEST", message : "Something went wrong"});
         await inngest.send({
             name : "execute/ai"
         })
 
     }),
-
 
 
     getWorkflows: protectedProcedure.query(({ ctx }) => {
@@ -24,7 +24,8 @@ export const appRouter = createTRPCRouter({
 
     createWorkflow: protectedProcedure.mutation(async () => {
 
-        await inngest.send({
+        await inngest.send({   
+
             name: "test/hello.world",
             data: {
                 email: "tanishqjangir@gmail.com"
