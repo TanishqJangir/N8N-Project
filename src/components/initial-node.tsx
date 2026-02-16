@@ -13,7 +13,6 @@ export const InitialNode = memo((props: NodeProps) => {
 
     return (
         <NodeSelector open={selectorOpen} onOpenChange={setSelectorOpen}>
-
             <WorkflowNode showToolbar={false}>
                 <PlaceholderNode
                     {...props}
