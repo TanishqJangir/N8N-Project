@@ -53,7 +53,6 @@ export const httpRequestExecutor: NodeExecutor<HttpRequestData> = async ({
 
     if (["POST", "PUT", "PATCH"].includes(method)) {
       const resolved = Handlebars.compile(data.body?.trim() || "{}")(context);
-      console.log("BODY : ", resolved)
       JSON.parse(resolved); // Validate JSON
       options.body = resolved;
       options.headers = {
@@ -84,8 +83,6 @@ export const httpRequestExecutor: NodeExecutor<HttpRequestData> = async ({
 
 
   });
-
-  // const result = await step.run("http-request", async () => context);
 
   //TODO : Publish "success" state for manual trigger
 
