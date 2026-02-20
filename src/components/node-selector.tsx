@@ -17,6 +17,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { NodeType } from "@/generated/prisma";
+import { SelectSeparator } from "./ui/select";
 
 
 
@@ -35,6 +36,12 @@ const triggerNodes: NodeTypeOption[] = [
         label: "Trigger manually",
         description: "Runs the flow on clicking a button. Good for getting started quickly.",
         icon: MousePointerIcon,
+    },
+    {
+        type: NodeType.GOOGLE_FORM_TRIGGER,
+        label: "Google Form",
+        description: "Runs the flow when a Google Form is submitted.",
+        icon: "/logos/googleform.svg",
     },
 ];
 
@@ -61,16 +68,16 @@ export function NodeSelector({
 }: NodeSelectorProps) {
 
 
-    const {setNodes, getNodes, screenToFlowPosition} = useReactFlow();
+    const { setNodes, getNodes, screenToFlowPosition } = useReactFlow();
 
-    const handleNodeSelect = useCallback((selection : NodeTypeOption) => {
+    const handleNodeSelect = useCallback((selection: NodeTypeOption) => {
         //check if trying to add a manual trigger when one already exists
-        if(selection.type === NodeType.MANUAL_TRIGGER){
+        if (selection.type === NodeType.MANUAL_TRIGGER) {
             const nodes = getNodes();
             const hasManualTrigger = nodes.some(
                 (node) => node.type === NodeType.MANUAL_TRIGGER,
             );
-            if(hasManualTrigger){
+            if (hasManualTrigger) {
                 toast.error("Only one manual trigger is allowed per workflow.");
                 return;
             }
@@ -85,18 +92,18 @@ export function NodeSelector({
             const centerY = window.innerHeight / 2;
 
             const flowPosition = screenToFlowPosition({
-                x : centerX + (Math.random() - 0.5) * 200,
-                y : centerY + (Math.random() - 0.5) * 200,
+                x: centerX + (Math.random() - 0.5) * 200,
+                y: centerY + (Math.random() - 0.5) * 200,
             });
 
             const newNode = {
                 id: createId(),
-                data : {},
-                position : flowPosition,
-                type : selection.type,
+                data: {},
+                position: flowPosition,
+                type: selection.type,
             };
 
-            if(hasInitialTrigger){
+            if (hasInitialTrigger) {
                 return [newNode];
             };
 
@@ -104,7 +111,7 @@ export function NodeSelector({
         });
 
         onOpenChange(false);
-    },[
+    }, [
         setNodes,
         getNodes,
         onOpenChange,
@@ -162,7 +169,7 @@ export function NodeSelector({
                     })}
                 </div>
 
-                
+                <SelectSeparator />
                 <div>
                     {executionNodes.map((nodeType) => {
                         const Icon = nodeType.icon;
