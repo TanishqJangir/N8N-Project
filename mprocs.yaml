@@ -1,6 +1,6 @@
 procs:
   ngrock:
-    cmd: ["cmd", "/c", "npm", "run", "ngrock:dev"]  # ✅ Fixed
+    cmd: ["cmd", "/c", "npm", "run", "ngrok:dev"]
 
   inngest:
     cmd: ["cmd", "/c", "npm", "run", "inngest:dev"]
