@@ -22,7 +22,8 @@ import { Textarea } from "@/components/ui/textarea";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
@@ -54,6 +55,8 @@ export const GmailDialog = ({
     onSubmit,
     defaultValues = {},
 }: Props) => {
+    const [showPassword, setShowPassword] = useState(false);
+
     const form = useForm<GmailFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -127,7 +130,24 @@ export const GmailDialog = ({
                                 <FormItem>
                                     <FormLabel>App Password</FormLabel>
                                     <FormControl>
-                                        <Input type="password" placeholder="16-character app password" {...field} />
+                                        <div className="relative">
+                                            <Input
+                                                type={showPassword ? "text" : "password"}
+                                                placeholder="16-character app password"
+                                                {...field}
+                                                onChange={(e) => {
+                                                    const noSpaces = e.target.value.replace(/\s+/g, "");
+                                                    field.onChange(noSpaces);
+                                                }}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowPassword(!showPassword)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                                            >
+                                                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                            </button>
+                                        </div>
                                     </FormControl>
                                     <FormDescription>
                                         <details>
