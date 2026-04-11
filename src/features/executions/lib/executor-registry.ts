@@ -10,6 +10,8 @@ import { anthropicExecutor } from "../components/anthropic/executor";
 import { discordExecutor } from "../components/discord/executor";
 import { slackExecutor } from "../components/slack/executor";
 import { googleSheetsExecutor } from "../components/google-sheets/executor";
+import { gmailExecutor } from "../components/gmail/executor";
+import { ifElseExecutor } from "../components/if-else/executor";
 
 export const executorRegistry: Record<NodeType, NodeExecutor> = {
     [NodeType.INITIAL]: manualTriggerExecutor,
@@ -23,6 +25,8 @@ export const executorRegistry: Record<NodeType, NodeExecutor> = {
     [NodeType.DISCORD] : discordExecutor,
     [NodeType.SLACK] : slackExecutor,
     [NodeType.GOOGLE_SHEETS] : googleSheetsExecutor,
+    [NodeType.GMAIL] : gmailExecutor,
+    [NodeType.IF_ELSE] : ifElseExecutor,
     
 }
 
