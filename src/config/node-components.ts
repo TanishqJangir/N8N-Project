@@ -11,6 +11,8 @@ import { AnthropicNode } from "@/features/executions/components/anthropic/node";
 import { DiscordNode } from "@/features/executions/components/discord/node";
 import { SlackNode } from "@/features/executions/components/slack/node";
 import { GoogleSheetsNode } from "@/features/executions/components/google-sheets/node";
+import { GmailNode } from "@/features/executions/components/gmail/node";
+import { IfElseNode } from "@/features/executions/components/if-else/node";
 
 export const nodeComponents = {
     [NodeType.INITIAL]: InitialNode,
@@ -24,6 +26,8 @@ export const nodeComponents = {
      [NodeType.DISCORD] : DiscordNode,
      [NodeType.SLACK] : SlackNode,
      [NodeType.GOOGLE_SHEETS] : GoogleSheetsNode,
+     [NodeType.GMAIL] : GmailNode,
+     [NodeType.IF_ELSE] : IfElseNode,
 } as const satisfies NodeTypes;
 
 

@@ -125,6 +125,8 @@ enum NodeType{
   DISCORD
   SLACK
   GOOGLE_SHEETS
+  GMAIL
+  IF_ELSE
 }
 
 model Node {

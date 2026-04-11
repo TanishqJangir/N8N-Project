@@ -5,6 +5,7 @@ import { useReactFlow } from "@xyflow/react";
 import {
     GlobeIcon,
     MousePointerIcon,
+    GitBranchIcon,
 } from "lucide-react";
 import { useCallback } from "react";
 import { toast } from "sonner";
@@ -95,6 +96,18 @@ const executionNodes: NodeTypeOption[] = [
         label: "Google Sheets",
         description: "Append rows in a Google Sheet.",
         icon: "/logos/googlesheets.svg",
+    },
+    {
+        type: NodeType.GMAIL,
+        label: "Gmail",
+        description: "Send an email via Gmail SMTP.",
+        icon: "/logos/gmail.svg",
+    },
+    {
+        type: NodeType.IF_ELSE,
+        label: "IF / ELSE",
+        description: "Split workflow into true/false branches based on a condition.",
+        icon: GitBranchIcon,
     },
 ];
 
